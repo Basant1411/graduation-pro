@@ -1,89 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:graduation2_project/App_layer/app_color.dart';
 import 'package:graduation2_project/presentation/Screens/HomeScreen.dart';
-import 'package:graduation2_project/presentation/Screens/Notification.dart';
-import 'package:graduation2_project/presentation/Screens/access_camera.dart';
+import 'package:graduation2_project/presentation/Screens/Notification_Screen.dart';
+import 'package:graduation2_project/presentation/Screens/camera.dart';
 import 'package:graduation2_project/presentation/Screens/history.dart';
 import 'package:graduation2_project/presentation/Screens/profile.dart';
-
-class NavBar extends StatefulWidget {
-  const NavBar({super.key});
-
+class BottomNavBar extends StatefulWidget {
   @override
-  State<NavBar> createState() => _NavBarState();
+  _BottomNavBarState createState() => _BottomNavBarState();
 }
 
-class _NavBarState extends State<NavBar> {
-  Widget? _child;
-
-  void _handleNavigationChange(int index) {
-    setState(() {
-      switch (index) {
-        case 0:
-          _child = HomeScreen();
-          break;
-        case 1:
-          _child = NotificationScreen();
-          break;
-        case 2:
-          _child = Camera();
-          break;
-        case 3:
-          _child = History();
-          break;
-        case 4:
-          _child = Profile();
-          break;
-      }
-      _child = AnimatedSwitcher(
-        switchInCurve: Curves.easeOut,
-        switchOutCurve: Curves.ease,
-        duration: Duration(microseconds: 1),
-
-        child: _child,
-      );
-    });
-  }
-
+class _BottomNavBarState extends State<BottomNavBar> {
+  List Screens=[HomeScreen(),LoadingScreen(),Camera(),History(),Profile()];
+  int _selected_index=0;
   @override
-  void initState() {
-    _child = HomeScreen();
-    super.initState();
-  }
-    Widget build(BuildContext context) {
-      return Scaffold(bottomNavigationBar: FluidNavBar(animationFactor:10,
-        icons: [
-          FluidNavBarIcon(
-              svgPath: "lib/assets/images/home.svg",
-              extras: {"label": "home"}),
-          FluidNavBarIcon(
-              icon: Icons.notifications,
-              extras: {"label": "Notification"}),
-          FluidNavBarIcon(
-              svgPath: "lib/assets/images/Camera.svg",
-              extras: {"label": "Camera"}),
-          FluidNavBarIcon(
-              icon: Icons.history,
-              extras:{"label": "history"}),
-          FluidNavBarIcon(
-              icon: Icons.person,
-              extras: {"label": "person"}),
+  Widget build(BuildContext context) {
+    return Scaffold(
+      bottomNavigationBar: CurvedNavigationBar(
+        index:_selected_index,
+        items: <Widget>[
+
+          Icon(Icons.home_outlined, size: 30,color:AppColor.main_color),
+          Icon(Icons.notifications, size: 30,color:AppColor.main_color),
+          Icon(Icons.camera, size: 30,color:AppColor.main_color),
+          Icon(Icons.history, size: 30,color:AppColor.main_color),
+          Icon(Icons.person, size: 30,color:AppColor.main_color),
         ],
-        onChange: _handleNavigationChange,
-        style: FluidNavBarStyle(barBackgroundColor:AppColor.button_color,
-            iconUnselectedForegroundColor: AppColor.main_color,iconSelectedForegroundColor: AppColor.main_color),
 
-        scaleFactor: 2,
-        defaultIndex: 0,
-        itemBuilder: (icon, item) =>
-            Semantics(
-              label: icon.extras!["label"],
-              child: item,
-            ),
+        animationCurve: Curves.easeInOut,
+        backgroundColor: Colors.transparent,
+        animationDuration: Duration(milliseconds: 600),
+
+        onTap: (index) {
+          setState(() {
+            _selected_index=index;
+          });
+        },
+        letIndexChange: (index) => true,
+        buttonBackgroundColor: AppColor.button_color,
+        color: AppColor.button_color,
+
       ),
-        body: _child,
-      );
-    }
+      body: Screens[
+      _selected_index
+      ],
+    );
   }
-
+}

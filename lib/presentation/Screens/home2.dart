@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graduation2_project/App_layer/app_color.dart';
-import 'package:graduation2_project/presentation/Screens/access_camera.dart';
+import 'package:graduation2_project/presentation/Screens/camera.dart';
 import 'package:graduation2_project/presentation/Screens/profile.dart';
 import 'package:graduation2_project/presentation/Screens/setting.dart';
 class HomeScreen2 extends StatefulWidget {

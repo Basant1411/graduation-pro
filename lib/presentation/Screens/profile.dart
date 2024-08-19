@@ -56,6 +56,7 @@ class _ProfileState extends State<Profile> {
           IconButton(onPressed:(){Navigator.push(context, MaterialPageRoute(builder:(build){return SettingScreen();}));}, icon: Icon(Icons.navigate_next))
 
         ],),
+        SizedBox(height:10,),
         GestureDetector(onTap:(){Navigator.push(context, MaterialPageRoute(builder:(build){return LoginScreen();}));},
           child: Row(children: [
             SizedBox(width: 10,),

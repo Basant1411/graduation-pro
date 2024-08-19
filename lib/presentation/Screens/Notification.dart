@@ -14,7 +14,9 @@ class _NotificationState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body:
+      SingleChildScrollView(child: Column(
+    
         children: [
           Column(
             children: [
@@ -52,7 +54,7 @@ class _NotificationState extends State<NotificationScreen> {
                     ),
                   ),
                   color: AppColor.button_color, onPressed:() {
-                    Navigator.push(context, MaterialPageRoute(builder: (context){return NotificationScreen();}));
+                    Navigator.push(context, MaterialPageRoute(builder: (context){return BottomNavBar();}));
 
                   },
 
@@ -61,11 +63,11 @@ class _NotificationState extends State<NotificationScreen> {
 
             ),
           SizedBox(height: 20,),
-            GestureDetector(onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context){return NavBar();}));} ,child: Text("Do not allow",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w800),)),
+            GestureDetector(onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context){return BottomNavBar();}));} ,child: Text("Do not allow",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w800),)),
             SizedBox(height: 150,),
 
           ]),
         ],
-      ));
+      )));
   }
 }
